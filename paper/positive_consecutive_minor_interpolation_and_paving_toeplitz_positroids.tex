@@ -1,0 +1,1002 @@
+\documentclass{amsart}
+
+\usepackage{amsmath,amssymb,mathtools}
+\usepackage{booktabs,tabularx}
+\usepackage[hidelinks,pdfusetitle]{hyperref}
+\usepackage{microtype}
+
+\allowdisplaybreaks
+\numberwithin{equation}{section}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\TN}{TN}
+\DeclareMathOperator{\Gr}{Gr}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\transpose}{\mathsf T}
+\newcommand{\cC}{\mathcal C}
+\newcommand{\cH}{\mathcal H}
+\newcommand{\cB}{\mathcal B}
+\newcommand{\one}{\mathbf 1}
+
+\title[PAVING TOEPLITZ POSITROIDS]{POSITIVE CONSECUTIVE-MINOR INTERPOLATION AND PAVING TOEPLITZ POSITROIDS}
+\date{Revised August 25, 2026}
+
+\author{Yaoyu Cheng}
+\address{Faculty of Business Administration, The Chinese University of Hong Kong, Hong Kong, China}
+\email{yaoyucheng@link.cuhk.edu.cn}
+
+\author{Sixuan Gu}
+\address{Institute of Mathematical Sciences, The Chinese University of Hong Kong, Hong Kong, China}
+\email{sixuangu@link.cuhk.edu.cn}
+
+\author{Wei Qi}
+\address{Department of Physics, The Ohio State University, Columbus, OH 43210, USA}
+\email{qi.673@osu.edu}
+
+\subjclass[2020]{Primary 15B48, 05B35; Secondary 14M15, 15A15, 41A15}
+\keywords{Totally nonnegative matrix; Toeplitz matrix; positroid; paving matroid; Pl\"ucker relation; consecutive minor; inverse function theorem}
+\hypersetup{
+  pdftitle={Positive Consecutive-Minor Interpolation and Paving Toeplitz Positroids},
+  pdfauthor={Yaoyu Cheng, Sixuan Gu, and Wei Qi},
+  pdfkeywords={totally nonnegative matrix, Toeplitz matrix, positroid, paving matroid, Plucker relation, consecutive minor}
+}
+
+\begin{document}
+
+\begin{abstract}
+Let $2\le m\le n$.  We classify the rank-$m$ paving positroids represented by full-row-rank $m\times n$ Toeplitz matrices that are totally nonnegative in every minor order.  For an adjacent-rank row extension $A=\binom{U}{f}$ with all maximal minors of $U$ positive, a mixed Pl\"ucker relation gives a subtraction-free expansion of every maximal minor of $A$ as a positive linear combination of all consecutive maximal minors lying in its span.  Equivalently, every alternating circuit of $U$ subdivides positively into the consecutive alternating circuits between its endpoints.  A fixed codimension-one row projection converts any totally nonnegative paving matrix into such a positive flag without changing its maximal minors.  Hence its maximal-minor support is determined by the zero set of the consecutive maximal minors; maximal zero runs expand to ordinary interval hyperplanes.
+
+For Toeplitz matrices every resulting support occurs.  The first rank-$(m-1)$ Toeplitz base point has a triangular consecutive-minor Jacobian.  At a polynomial base point its Jacobian is $D\Psi=\kappa K$, an explicit symmetric positive-definite matrix.  Here
+\[
+ K=\left((-1)^{s-t}\binom{2m-2}{m-1+s-t}\right)_{t,s=1}^N,
+ \qquad N=n-m+1,
+\]
+and
+\[
+ \kappa=\left(\prod_{\ell=0}^{m-2}\binom{m-2}{\ell}\right)
+ \left(\prod_{j=1}^{m-2}j!\right)^2>0,
+\]
+whose Toeplitz symbol is $(2-2\cos\theta)^{m-1}$.  The inverse function theorem realizes every proper zero set $Z\subsetneq[N]$ while all lower-order minors remain positive.  Thus the dependent hyperplanes are precisely ordinary intervals meeting pairwise in at most $m-2$ elements, and the number of Toeplitz-representable paving positroid cells in the fixed natural column order is $2^{n-m+1}-1$.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}\label{sec:introduction}
+
+A real matrix is \emph{totally nonnegative} if every minor determinant is nonnegative.  A full-row-rank $m\times n$ matrix with nonnegative maximal minors represents a positroid, or equivalently a point of the totally nonnegative Grassmannian $\Gr_{m,n}^{\ge0}$; see \cite{FJ,Postnikov}.  Requiring the representing matrix itself to be totally nonnegative in every minor order is stronger.  We call such a matrix an \emph{all-minor TN representative}, to distinguish this condition from Grassmannian nonnegativity, which controls only maximal minors.  Imposing the Toeplitz equations
+\[
+ A_{ij}=a_{j-i}
+\]
+then selects a rigid linear locus inside the matrix space.  Determining which positroid cells meet this locus is part of the Toeplitz support problem in the AIM list on total positivity \cite{AIM}.
+
+A companion paper gives the complete Toeplitz-positroid classification in ranks two and three, including loops, endpoint parallel classes, and rank-two interval flats \cite{PaperA}.  Here we treat the paving sector in arbitrary rank.  For a rank-$m$ column matroid, paving means that every set of at most $m-1$ columns is independent; see \cite{Oxley}.  A hyperplane is called dependent when it contains at least $m$ elements.  The paving hypothesis removes lower-rank degenerations while allowing arbitrary vanishing among maximal minors.  In ranks two and three, the present theorem recovers the positive no-loop and strict-$\TN_2$ strata of the companion classification; in ranks $m\ge4$ it gives a new complete boundary layer.
+
+For $1\le t\le N:=n-m+1$, write
+\[
+ \cC_t=[t,t+m-1],
+ \qquad
+ D_t(A)=\det A_{[:,\cC_t]}
+\]
+for the consecutive maximal minors.  The main result is an equivalence between Toeplitz realizability, a zero-set rule, and an interval-hyperplane description.
+
+\begin{theorem}[Classification of paving Toeplitz positroids]\label{thm:main}
+Fix $2\le m\le n$, put $N=n-m+1$, and let $M$ be a rank-$m$ paving matroid on $[n]$.  The following are equivalent.
+\begin{enumerate}
+\item[(i)] $M$ is represented by a full-row-rank totally nonnegative $m\times n$ Toeplitz matrix.
+\item[(ii)] There is a proper subset $Z\subsetneq[N]$ such that, for every $J=\{j_1<\cdots<j_m\}\in\binom{[n]}m$,
+\begin{equation}\label{eq:main-basis-rule}
+ J\in\cB(M)
+ \quad\Longleftrightarrow\quad
+ [j_1,j_m-m+1]\nsubseteq Z.
+\end{equation}
+\item[(iii)] The dependent hyperplanes of $M$ are ordinary intervals $H_1,\ldots,H_s\subsetneq[n]$ of cardinality at least $m$, and
+\begin{equation}\label{eq:main-intersection}
+ |H_\alpha\cap H_\beta|\le m-2
+ \qquad(\alpha\ne\beta).
+\end{equation}
+\end{enumerate}
+Moreover, every matroid in the theorem has a Toeplitz representation for which every minor of order at most $m-1$ is strictly positive.  For any representation in (i), the set in (ii) is recovered as
+\begin{equation}\label{eq:main-Z}
+ Z=\{t\in[N]:D_t(A)=0\}.
+\end{equation}
+Consequently, exactly $2^{n-m+1}-1$ paving positroid cells in the fixed natural column order contain an all-minor TN Toeplitz point.
+\end{theorem}
+
+If the maximal runs of $Z$ are $[u_\alpha,v_\alpha]$, then the intervals in (iii) are
+\[
+ H_\alpha=[u_\alpha,v_\alpha+m-1].
+\]
+In the interval-rank language of Knutson--Lederer and Knutson, and the paving setting studied by Park, Theorem~\ref{thm:main} says that the Toeplitz-representable paving positroids are precisely the paving interval positroids in the displayed linear order \cite{KnutsonLederer,Knutson,Park}.
+
+The proof separates into a matrix-theoretic support theorem and a Toeplitz realization theorem.  The support theorem begins with an adjacent-rank flag.  If the $(m-1)\times(m-1)$ minors of $U$ are positive, then every maximal minor $p_J$ of $A=\binom{U}{f}$ has an expansion
+\begin{equation}\label{eq:intro-interpolation}
+ p_J=\sum_{t=j_1}^{j_m-m+1}C_{J,t}(U)D_t,
+ \qquad C_{J,t}(U)>0,
+\end{equation}
+where each coefficient is subtraction-free rational in the Pl\"ucker coordinates of $U$.  A fixed row projection with all maximal minors equal to one transforms any totally nonnegative paving matrix into this positive-flag form while preserving its maximal minors.  Formula \eqref{eq:intro-interpolation} then turns vanishing into a consecutive-window condition with no cancellation.
+
+For realization, we give two complementary local charts.  The first uses complete-homogeneous coefficients and a one-sided coefficient slice; its consecutive-minor Jacobian is triangular.  The second uses the polynomial sequence $a_k=(M+k)^{m-2}$ and a symmetric coefficient slice; its Jacobian is a positive scalar multiple of a positive-definite Toeplitz matrix with symbol $(2-2\cos\theta)^{m-1}$.  The triangular chart gives the shortest realization proof, while the polynomial chart is included to identify the finite-difference operator controlling the local geometry.
+
+The mixed Pl\"ucker relation used below is classical.  At the level of strict positivity, Rao's stacking-positivity relation states that adjoining one row to a positive adjacent-rank Grassmannian representative and imposing positivity of its consecutive maximal minors produces a positive representative \cite[Section~5.1]{Rao}.  Theorem~\ref{thm:interpolation} strengthens this implication by giving an expansion through every consecutive anchor in the span, subtraction-free coefficients, an exact nonnegative-boundary support rule, and a circuit subdivision identity.  Consecutive ranks also occupy a distinguished place in positive flag geometry: Lusztig and Pl\"ucker positivity agree in that regime \cite{BlochKarp}, and consecutive-rank flag positroids have strong realizability and tropical properties \cite{BEW}.  Positive localization formulas of a related shape occur in spline and knot-refinement theory \cite{deBoorDeVore,Lyche,Mazure}.  Our use of these ideas is support-theoretic: all consecutive anchors in the span occur with positive coefficients, and every admissible zero pattern is realized inside the finite Toeplitz locus.  Toeplitz minors and their skew-Schur interpretation enter at the complete-homogeneous base point \cite{GarciaTierz,Macdonald}; Rietsch's work gives the broader geometric setting for totally positive Toeplitz matrices \cite{Rietsch,RietschSurvey}.
+
+Section~\ref{sec:plucker} records the mixed Pl\"ucker identity, and Section~\ref{sec:interpolation} proves positive interpolation and its circuit form.  Section~\ref{sec:projection} passes from totally nonnegative paving matrices to positive adjacent-rank flags.  Section~\ref{sec:paving-support} extracts the interval-hyperplane support.  Sections~\ref{sec:base} and \ref{sec:realization} give the triangular Toeplitz chart.  Section~\ref{sec:polynomial-chart} develops the symmetric finite-difference chart.  Section~\ref{sec:assembly} proves Theorem~\ref{thm:main}, and Section~\ref{sec:example} gives an exact rational example.
+
+An accompanying Lean~4 formalization, supplied with the manuscript, checks every numbered theorem, lemma, and corollary, including the exact rational example and the strengthened symmetric positive-definite Jacobian formula.
+
+\section{Notation and the mixed Pl\"ucker relation}\label{sec:plucker}
+
+For an increasing set $J\subseteq[n]$, write $A_{[:,J]}$ for the submatrix on all rows and columns $J$.  If $A$ has $m$ rows and $|J|=m$, put
+\[
+ p_J=\det A_{[:,J]}.
+\]
+For an $(m-1)\times n$ matrix $U$ and $I\in\binom{[n]}{m-1}$, put
+\[
+ q_I=\det U_{[:,I]}.
+\]
+All sets appearing as minor indices are placed in increasing order.  For integers $a\le b$, we use $[a,b]$ for the integer interval $\{a,a+1,\ldots,b\}$.
+
+Let
+\begin{equation}\label{eq:row-extension}
+ A=\binom{U}{f}\in\RR^{m\times n},
+ \qquad U\in\RR^{(m-1)\times n},
+ \qquad f\in\RR^{1\times n}.
+\end{equation}
+The row spaces form a flag of adjacent ranks whenever both matrices have full row rank.  The following incidence relation is the local identity behind the interpolation theorem.
+
+\begin{lemma}[Mixed Pl\"ucker relation]\label{lem:mixed-plucker}
+Let $S\in\binom{[n]}{m-2}$ and let $a<b<c$ be elements of $[n]\setminus S$.  Then
+\begin{equation}\label{eq:mixed-plucker}
+ p_{S\cup\{a,c\}}q_{S\cup\{b\}}
+ =p_{S\cup\{a,b\}}q_{S\cup\{c\}}
+ +p_{S\cup\{b,c\}}q_{S\cup\{a\}}.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+This is the three-term incidence Pl\"ucker relation for the flag
+$\operatorname{row}(U)\subseteq\operatorname{row}(A)$.  We give the sign convention explicitly.
+
+Write $S=(s_1<\cdots<s_{m-2})$ and use ordered brackets
+\[
+ [S,x]_U,\qquad [S,x,y]_A,
+\]
+in which $x$ and $y$ are appended to the ordered word $S$ rather than inserted into increasing order.  Assume first that the columns indexed by $S$ are independent.  After an invertible change of the first $m-1$ rows and subtraction of a linear combination of those rows from the last row, the columns in $S$ have zero last coordinate.  In the one-dimensional quotient of the top row space by their span, let $\alpha_x$ be the coordinate of the top part of column $x$, and write $\widetilde f_x$ for its adjusted last coordinate.  Up to one common nonzero factor,
+\[
+ [S,x]_U=\alpha_x,
+ \qquad
+ [S,x,y]_A=\alpha_x\widetilde f_y-\alpha_y\widetilde f_x.
+\]
+Hence
+\[
+ [S,a,c]_A[S,b]_U
+ =[S,a,b]_A[S,c]_U+[S,b,c]_A[S,a]_U
+\]
+by direct expansion.
+
+It remains only to translate ordered brackets to the increasing minors used in the statement.  Put
+\[
+ \iota_S(x)=\#\{s\in S:s>x\}.
+\]
+For $x<y$,
+\[
+ [S,x]_U=(-1)^{\iota_S(x)}q_{S\cup\{x\}},
+ \qquad
+ [S,x,y]_A=(-1)^{\iota_S(x)+\iota_S(y)}
+ p_{S\cup\{x,y\}}.
+\]
+Each of the three products therefore acquires the same sign
+\[
+ (-1)^{\iota_S(a)+\iota_S(b)+\iota_S(c)},
+\]
+which cancels and gives \eqref{eq:mixed-plucker}.  The case in which the columns in $S$ are dependent follows by polynomial continuity.
+\end{proof}
+
+When all $q_I$ are positive, \eqref{eq:mixed-plucker} can be solved without subtraction:
+\begin{equation}\label{eq:positive-step}
+ p_{S\cup\{a,c\}}
+ =\frac{q_{S\cup\{c\}}}{q_{S\cup\{b\}}}
+   p_{S\cup\{a,b\}}
+ +\frac{q_{S\cup\{a\}}}{q_{S\cup\{b\}}}
+   p_{S\cup\{b,c\}}.
+\end{equation}
+Both coefficients are strictly positive, and both maximal minors on the right have smaller span than the one on the left.
+
+\section{Positive interpolation by consecutive maximal minors}\label{sec:interpolation}
+
+For $1\le t\le n-m+1$, define the consecutive column block and its maximal minor by
+\begin{equation}\label{eq:anchors}
+ \cC_t=[t,t+m-1],
+ \qquad
+ D_t=p_{\cC_t}.
+\end{equation}
+For $J=\{j_1<\cdots<j_m\}$, define
+\[
+ \operatorname{span}(J)=j_m-j_1,
+ \qquad
+ \mathcal A(J)=[j_1,j_m-m+1].
+\]
+The interval $\mathcal A(J)$ consists exactly of the starting positions of consecutive $m$-subsets contained in $[j_1,j_m]$.
+
+\begin{theorem}[Positive consecutive-minor interpolation]\label{thm:interpolation}
+Let $A=\binom{U}{f}$ be as in \eqref{eq:row-extension}, and assume
+\begin{equation}\label{eq:qpositive}
+ q_I>0\qquad\text{for every }I\in\binom{[n]}{m-1}.
+\end{equation}
+For every $J=\{j_1<\cdots<j_m\}\in\binom{[n]}m$, there are coefficients
+\[
+ C_{J,t}(U)>0,
+ \qquad t\in\mathcal A(J),
+\]
+such that
+\begin{equation}\label{eq:interpolation}
+ p_J=\sum_{t=j_1}^{j_m-m+1}C_{J,t}(U)D_t.
+\end{equation}
+Each coefficient is a subtraction-free rational function of the Pl\"ucker coordinates $q_I$.
+\end{theorem}
+
+\begin{proof}
+We induct on $\operatorname{span}(J)$.  The smallest possible span is $m-1$.  In that case $J=\cC_{j_1}$ and \eqref{eq:interpolation} holds with $C_{J,j_1}=1$.
+
+Suppose that $\operatorname{span}(J)>m-1$.  Put
+\[
+ a=j_1,
+ \qquad c=j_m,
+ \qquad S=J\setminus\{a,c\}.
+\]
+Since $J$ is not consecutive, choose any
+\[
+ b\in(a,c)\setminus J.
+\]
+Formula \eqref{eq:positive-step} gives
+\begin{equation}\label{eq:induction-step}
+ p_J
+ =\frac{q_{S\cup\{c\}}}{q_{S\cup\{b\}}}
+   p_{S\cup\{a,b\}}
+ +\frac{q_{S\cup\{a\}}}{q_{S\cup\{b\}}}
+   p_{S\cup\{b,c\}}.
+\end{equation}
+Both coefficients are positive by \eqref{eq:qpositive}, and each maximal minor on the right has strictly smaller span.  The induction hypothesis therefore expands both in consecutive anchors with positive subtraction-free coefficients.
+
+It remains to verify that their anchor intervals cover all of $\mathcal A(J)$.  Set
+\[
+ c_L=\max(S\cup\{b\}),
+ \qquad
+ a_R=\min(S\cup\{b\}).
+\]
+The left branch in \eqref{eq:induction-step} has anchor interval
+\[
+ [j_1,c_L-m+1],
+\]
+whereas the right branch has anchor interval
+\[
+ [a_R,j_m-m+1].
+\]
+The set $S\cup\{b\}$ contains $m-1$ distinct integers in $[a_R,c_L]$, so
+\[
+ c_L-a_R+1\ge m-1,
+ \qquad\text{equivalently}
+ \qquad a_R\le c_L-m+2.
+\]
+Thus the two anchor intervals overlap or are adjacent, and their union is precisely
+$[j_1,j_m-m+1]$.  An anchor appearing in one branch has a positive coefficient, while an anchor appearing in both receives a sum of positive coefficients.  This completes the induction.  Since the recursion uses only addition, multiplication, and division by the positive $q$-coordinates, every coefficient is subtraction-free rational in the $q_I$.  The missing index $b$ may be chosen arbitrarily at each step; different choices can produce different coefficients, and no canonicity is asserted.
+\end{proof}
+
+\begin{corollary}[Support from consecutive anchors]\label{cor:anchor-support}
+Under the hypotheses of Theorem~\ref{thm:interpolation}, assume in addition that
+\[
+ D_t\ge0\qquad(1\le t\le n-m+1).
+\]
+Then every maximal minor of $A$ is nonnegative, and for
+$J=\{j_1<\cdots<j_m\}$,
+\begin{equation}\label{eq:zero-criterion-flag}
+ p_J=0
+ \quad\Longleftrightarrow\quad
+ D_t=0\quad\text{for every }t\in[j_1,j_m-m+1].
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Every term in \eqref{eq:interpolation} is nonnegative, and every coefficient is strictly positive.  Hence the sum is nonnegative and vanishes exactly when all of its anchor terms vanish.
+\end{proof}
+
+
+\begin{corollary}[Positive subdivision of alternating circuits]\label{cor:circuit-subdivision}
+For $J=\{j_1<\cdots<j_m\}\in\binom{[n]}m$, define the alternating circuit vector of $U$ by
+\begin{equation}\label{eq:circuit-vector}
+ c_J=\sum_{\nu=1}^m(-1)^{\nu-1}q_{J\setminus\{j_\nu\}}e_{j_\nu}\in\RR^n.
+\end{equation}
+Then $Uc_J=0$, and the coefficients in Theorem~\ref{thm:interpolation} may be chosen so that
+\begin{equation}\label{eq:circuit-subdivision}
+ c_J=\sum_{t=j_1}^{j_m-m+1}C_{J,t}(U)c_{\cC_t},
+ \qquad C_{J,t}(U)>0.
+\end{equation}
+Thus every alternating circuit is a positive combination of all consecutive alternating circuits whose supports lie between its first and last index.
+\end{corollary}
+
+\begin{proof}
+The cofactor relation gives $Uc_J=0$.  If $f\in\RR^{1\times n}$ is arbitrary and $A=\binom{U}{f}$, expansion along the last row gives
+\[
+ p_J=(-1)^{m+1}\langle c_J,f\rangle,
+ \qquad
+ D_t=(-1)^{m+1}\langle c_{\cC_t},f\rangle.
+\]
+Fix the recursion choices in the proof of Theorem~\ref{thm:interpolation}.  Its coefficients depend only on the $q$-coordinates of $U$, not on $f$.  Substituting the two Laplace expansions into \eqref{eq:interpolation}, and using that $f$ is arbitrary, yields \eqref{eq:circuit-subdivision}.
+\end{proof}
+
+\begin{remark}\label{rem:spline}
+In the strict regime $D_t>0$, Corollary~\ref{cor:anchor-support} recovers the positivity implication in Rao's stacking-positivity relation \cite[Section~5.1]{Rao}.  Theorem~\ref{thm:interpolation} supplies the stronger all-anchor, subtraction-free expansion and its exact boundary support consequence.  Positive knot insertion and Chebyshevian B-spline recurrences likewise express a coarse or long-span object as a positive combination of more local ones \cite{deBoorDeVore,Lyche,Mazure}.  Thus Theorem~\ref{thm:interpolation} may also be viewed as an adjacent-rank Pl\"ucker analogue of positive localization: it applies to arbitrary flags satisfying \eqref{eq:qpositive}, and every consecutive maximal anchor in the span occurs with a strictly positive coefficient.
+\end{remark}
+
+
+\section{A positive codimension-one projection}\label{sec:projection}
+
+The hypothesis of Theorem~\ref{thm:interpolation} singles out a particular $(m-1)$-row block.  For a totally nonnegative paving matrix, a fixed row projection produces such a block directly.
+
+\begin{lemma}[Positive codimension-one projection]\label{lem:positive-projection}
+For every $m\ge2$ there is an $(m-1)\times m$ matrix $Q$ all of whose maximal minors are equal to $1$.  One may take
+\begin{equation}\label{eq:Q}
+ Q=(I_{m-1}\;w),
+ \qquad
+ w_j=(-1)^{m-1-j},\quad 1\le j\le m-1.
+\end{equation}
+Moreover, $Q$ is the first $m-1$ rows of
+\begin{equation}\label{eq:P}
+ P=\begin{pmatrix}I_{m-1}&w\\0&1\end{pmatrix},
+ \qquad \det P=1.
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+Deleting the last column of $Q$ leaves $I_{m-1}$.  Deleting column $j<m$ gives determinant $(-1)^{m-1-j}w_j=1$.  The determinant assertion for $P$ is immediate.
+\end{proof}
+
+\begin{theorem}[Refinement for totally nonnegative paving matrices]\label{thm:paving-refinement}
+Let $A\in\RR^{m\times n}$ be full-row-rank and totally nonnegative, and suppose every $(m-1)$-subset of its columns is independent.  For every $J=\{j_1<\cdots<j_m\}$ there are coefficients $\lambda_{J,t}>0$ such that
+\begin{equation}\label{eq:paving-refinement}
+ \det A_{[:,J]}
+ =\sum_{t=j_1}^{j_m-m+1}\lambda_{J,t}
+   \det A_{[:,[t,t+m-1]]}.
+\end{equation}
+Consequently,
+\begin{equation}\label{eq:paving-zero-criterion}
+ \det A_{[:,J]}=0
+ \quad\Longleftrightarrow\quad
+ D_t(A)=0\quad\text{for every }t\in[j_1,j_m-m+1].
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+Let $Q$ and $P$ be as in Lemma~\ref{lem:positive-projection}, and put $B=QA$, the first $m-1$ rows of $PA$.  For every $I\in\binom{[n]}{m-1}$, Cauchy--Binet gives
+\begin{equation}\label{eq:projection-CB}
+ \det B_{[:,I]}
+ =\sum_{R\in\binom{[m]}{m-1}}
+   \det Q_{[:,R]}\det A_{R,I}
+ =\sum_{R\in\binom{[m]}{m-1}}\det A_{R,I}.
+\end{equation}
+Every summand is nonnegative.  Since the columns indexed by $I$ are independent, at least one row minor in the last sum is nonzero, and hence positive.  Thus every maximal minor of $B$ is strictly positive.
+
+Apply Theorem~\ref{thm:interpolation} to $PA=\binom{B}{g}$.  Since $\det P=1$, every maximal minor of $PA$ equals the corresponding maximal minor of $A$, so the resulting expansion is \eqref{eq:paving-refinement}.  All consecutive maximal minors are nonnegative because $A$ is totally nonnegative.  Strict positivity of the coefficients then gives \eqref{eq:paving-zero-criterion}.
+\end{proof}
+
+\begin{remark}
+The proof also gives a positive subdivision of the alternating circuits after applying $Q$.  In this form, Theorem~\ref{thm:paving-refinement} is independent of Toeplitz structure; Toeplitz equations enter only in the realization of all possible anchor zero sets.
+\end{remark}
+
+\section{Consecutive zero runs and interval hyperplanes}\label{sec:paving-support}
+
+Let $A$ satisfy the hypotheses of Theorem~\ref{thm:paving-refinement}, put $N=n-m+1$, and define
+\begin{equation}\label{eq:Z}
+ Z(A)=\{t\in[N]:D_t(A)=0\}.
+\end{equation}
+Full row rank and \eqref{eq:paving-zero-criterion} imply $Z(A)\ne[N]$.  Write the maximal consecutive runs of $Z(A)$ as
+\begin{equation}\label{eq:runs}
+ Z(A)=[u_1,v_1]\sqcup\cdots\sqcup[u_s,v_s],
+ \qquad v_\alpha+1<u_{\alpha+1},
+\end{equation}
+and define
+\begin{equation}\label{eq:hyperplanes}
+ H_\alpha=[u_\alpha,v_\alpha+m-1]\subseteq[n].
+\end{equation}
+
+\begin{theorem}[Interval-hyperplane support]\label{thm:interval-support}
+Under the preceding hypotheses, the nonbases of the column matroid are precisely
+\begin{equation}\label{eq:nonbasis-union}
+ \bigcup_{\alpha=1}^s\binom{H_\alpha}{m}.
+\end{equation}
+The sets $H_\alpha$ are exactly its dependent hyperplanes, and
+\begin{equation}\label{eq:hyperplane-intersection}
+ |H_\alpha\cap H_\beta|\le m-2
+ \qquad(\alpha\ne\beta).
+\end{equation}
+In particular, the entire maximal-minor support is recovered from the consecutive zero set $Z(A)$.
+\end{theorem}
+
+\begin{proof}
+For $J=\{j_1<\cdots<j_m\}$, Theorem~\ref{thm:paving-refinement} says that $J$ is a nonbasis exactly when
+\[
+ [j_1,j_m-m+1]\subseteq Z(A).
+\]
+This anchor interval is connected, so it lies in one maximal run $[u_\alpha,v_\alpha]$.  Equivalently,
+\[
+ u_\alpha\le j_1
+ \quad\text{and}\quad
+ j_m\le v_\alpha+m-1,
+\]
+which is exactly $J\subseteq H_\alpha$.  This proves \eqref{eq:nonbasis-union}.
+
+Every $(m-1)$-subset is independent, while $H_\alpha$ contains a dependent $m$-subset, so $\rank H_\alpha=m-1$.  Let $x\notin H_\alpha$.  If $x<u_\alpha$, maximality of the zero run gives $u_\alpha>1$ and $D_{u_\alpha-1}>0$.  The set
+\[
+ \{x,u_\alpha,u_\alpha+1,\ldots,u_\alpha+m-2\}
+\]
+contains a basis by \eqref{eq:paving-zero-criterion}, because its anchor interval contains $u_\alpha-1$.  The case $x>v_\alpha+m-1$ is symmetric, using $D_{v_\alpha+1}>0$.  Thus adjoining any outside element raises the rank to $m$, and $H_\alpha$ is a hyperplane.
+
+Separated zero runs satisfy $u_{\alpha+1}\ge v_\alpha+2$.  Hence
+\[
+ |H_\alpha\cap H_{\alpha+1}|
+ \le(v_\alpha+m-1)-(v_\alpha+2)+1=m-2,
+\]
+and nonadjacent intervals have no larger intersection.  Finally, if $F$ is another dependent hyperplane, choose a dependent $m$-subset $J\subseteq F$.  Then $J\subseteq H_\alpha$ for some $\alpha$, and both $F$ and $H_\alpha$ are the closure of the rank-$(m-1)$ set $J$.  Thus $F=H_\alpha$.
+\end{proof}
+
+\begin{corollary}[Upper bound]\label{cor:upper-bound}
+For fixed $m,n$, at most $2^{n-m+1}-1$ paving positroid cells in the fixed natural column order contain a full-row-rank all-minor TN $m\times n$ representative.  The same upper bound holds when the representative is required to be Toeplitz.
+\end{corollary}
+
+\begin{proof}
+The proper subset $Z(A)\subsetneq[N]$ determines the support by Theorem~\ref{thm:interval-support}.  Distinct subsets give distinct supports because $t\in Z(A)$ exactly when $[t,t+m-1]$ is a nonbasis.
+\end{proof}
+
+\section{A complete-homogeneous Toeplitz base point}\label{sec:base}
+
+We now impose Toeplitz structure and construct a rank-$(m-1)$ point at which the consecutive maximal minors have an invertible Toeplitz Jacobian.
+
+Put
+\[
+ p=m-1
+\]
+and define
+\begin{equation}\label{eq:complete-h}
+ h_k=h_k(1^p)=\binom{k+p-1}{p-1}\quad(k\ge0),
+ \qquad h_k=0\quad(k<0).
+\end{equation}
+Fix an integer $L\ge m-1$ and let
+\begin{equation}\label{eq:base-matrix}
+ A^{(0)}=\bigl(h_{L+j-i}\bigr)_{\substack{1\le i\le m\\1\le j\le n}}.
+\end{equation}
+All displayed indices in \eqref{eq:base-matrix} are nonnegative.
+
+\begin{lemma}[Strict lower-order positivity]\label{lem:base-positive}
+Every minor of $A^{(0)}$ of order at most $m-1$ is strictly positive, and
+\[
+ \rank A^{(0)}=m-1.
+\]
+Consequently, every maximal minor of $A^{(0)}$ is zero.
+\end{lemma}
+
+\begin{proof}
+Let $1\le r\le p$, let
+\[
+ I=\{i_1<\cdots<i_r\}\subseteq[m],
+ \qquad
+ J=\{j_1<\cdots<j_r\}\subseteq[n],
+\]
+and define partitions of length $r$ by
+\begin{equation}\label{eq:lambda-mu}
+ \lambda_t=L+j_{r+1-t}-(r+1-t),
+ \qquad
+ \mu_t=i_{r+1-t}-(r+1-t).
+\end{equation}
+Both are weakly decreasing and nonnegative.  Moreover,
+\[
+ \lambda_t-\mu_t=L+j_{r+1-t}-i_{r+1-t}\ge L-m+r\ge0,
+\]
+so $\mu\subseteq\lambda$.  Reversing both rows and columns in the Jacobi--Trudi determinant introduces the sign $(-1)^{r(r-1)/2}$ twice, so the signs cancel and
+\begin{equation}\label{eq:minor-schur}
+ \det A^{(0)}_{I,J}=s_{\lambda/\mu}(1^p).
+\end{equation}
+The skew shape $\lambda/\mu$ has at most $r\le p$ rows.  Filling every box in its $t$th row with $t$ produces a semistandard Young tableau with entries in $[p]$.  Hence
+\[
+ s_{\lambda/\mu}(1^p)>0.
+\]
+This proves strict positivity of every minor of order at most $p=m-1$.
+
+For $k\ge0$, the number $h_k=\binom{k+p-1}{p-1}$ is a polynomial in $k$ of degree $p-1$.  Because all indices in \eqref{eq:base-matrix} are nonnegative, every row of $A^{(0)}$, viewed as a function of the column index $j$, lies in the span of
+\[
+ 1,j,j^2,\ldots,j^{p-1}.
+\]
+Thus $\rank A^{(0)}\le p$.  A positive $p\times p$ minor gives the reverse inequality, so the rank is exactly $p=m-1$.
+\end{proof}
+
+\begin{remark}
+The identity \eqref{eq:minor-schur} is a finite Toeplitz-minor form of Jacobi--Trudi.  The shift $L\ge m-1$ removes structural zeros, while the specialization to $p=m-1$ variables makes every minor up to order $p$ positive and forces rank $p$.
+\end{remark}
+
+\section{Toeplitz local coordinates and realization}\label{sec:realization}
+
+A general $m\times n$ Toeplitz matrix is
+\begin{equation}\label{eq:toeplitz-general}
+ T_m(a)=\bigl(a_{j-i}\bigr)_{\substack{1\le i\le m\\1\le j\le n}},
+ \qquad 1-m\le j-i\le n-1.
+\end{equation}
+Put $N=n-m+1$.  Starting from $A^{(0)}$, fix the Toeplitz coefficients
+\[
+ a_{1-m},a_{2-m},\ldots,a_{m-2}
+\]
+and vary
+\begin{equation}\label{eq:b-variables}
+ b_t=a_{m-2+t},
+ \qquad 1\le t\le N.
+\end{equation}
+Let
+\begin{equation}\label{eq:Phi}
+ \Phi(b_1,\ldots,b_N)=(D_1,\ldots,D_N),
+ \qquad
+ D_t=\det T_m(a)_{[:,[t,t+m-1]]}.
+\end{equation}
+At the complete-homogeneous point $b^{(0)}$, Lemma~\ref{lem:base-positive} gives
+\[
+ \Phi(b^{(0)})=0.
+\]
+
+\begin{lemma}[Triangular consecutive-minor Jacobian]\label{lem:triangular-jacobian}
+The Jacobian $D\Phi(b^{(0)})$ is lower triangular.  Its diagonal entries are
+\begin{equation}\label{eq:jacobian-diagonal}
+ \left.\frac{\partial D_t}{\partial b_t}\right|_{b=b^{(0)}}
+ =(-1)^{m+1}
+ \det A^{(0)}_{\{2,\ldots,m\},\{t,\ldots,t+m-2\}}
+ \ne0.
+\end{equation}
+In particular, $D\Phi(b^{(0)})$ is invertible.
+\end{lemma}
+
+\begin{proof}
+The largest Toeplitz coefficient index appearing in the block of columns $[t,t+m-1]$ is
+\[
+ (t+m-1)-1=t+m-2,
+\]
+and it occurs only in the top-right entry of that block.  By \eqref{eq:b-variables}, this coefficient is $b_t$.  Therefore $D_t$ depends only on $b_1,\ldots,b_t$, proving lower triangularity.
+
+Differentiating the determinant with respect to its unique top-right entry gives the cofactor with sign $(-1)^{1+m}$, namely \eqref{eq:jacobian-diagonal}.  The cofactor is strictly positive by Lemma~\ref{lem:base-positive}, so the diagonal entry has the stated nonzero sign.
+\end{proof}
+
+\begin{theorem}[Local realization of arbitrary anchor data]\label{thm:local-realization}
+There is a number $\eta>0$ such that every
+\[
+ \delta=(\delta_1,\ldots,\delta_N)\in[0,\eta)^N
+\]
+is realized by a Toeplitz matrix $A(\delta)$ satisfying
+\begin{enumerate}
+\item every minor of order at most $m-1$ is strictly positive;
+\item its consecutive maximal minors are
+\[
+ \det A(\delta)_{[:,[t,t+m-1]]}=\delta_t;
+\]
+\item every maximal minor is nonnegative, so $A(\delta)$ is totally nonnegative;
+\item $A(\delta)$ has full row rank if and only if $\delta\ne0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:triangular-jacobian} and the inverse function theorem give neighborhoods $\mathcal U_0$ of $b^{(0)}$ and $\mathcal V_0$ of $0$ such that
+\[
+ \Phi:\mathcal U_0\longrightarrow\mathcal V_0
+\]
+is a real-analytic diffeomorphism.  There are only finitely many minors of orders at most $m-1$, and all are strictly positive at $A^{(0)}$ by Lemma~\ref{lem:base-positive}.  Choose an open neighborhood $\mathcal U\subseteq\mathcal U_0$ on which all of these minors remain positive.  Its image $\mathcal V=\Phi(\mathcal U)$ is open and contains the origin, so there is $\eta>0$ with
+\[
+ (-\eta,\eta)^N\subseteq\mathcal V.
+\]
+
+Take $\delta\in[0,\eta)^N$ and let $A(\delta)$ be the Toeplitz matrix corresponding to $\Phi^{-1}(\delta)$.  Its first $m-1$ rows have all maximal minors positive, and its consecutive $m\times m$ minors are the nonnegative numbers $\delta_t$.  Corollary~\ref{cor:anchor-support} therefore implies that every maximal minor of $A(\delta)$ is nonnegative.  Together with strict positivity in all lower orders, this proves total nonnegativity.
+
+Finally, an $m\times n$ matrix has full row rank exactly when at least one maximal minor is nonzero.  Here this occurs exactly when at least one $\delta_t$ is positive.
+\end{proof}
+
+\begin{corollary}[Every zero pattern is Toeplitz-realizable]\label{cor:every-Z}
+For every proper subset $Z\subsetneq[N]$, there is a full-row-rank totally nonnegative $m\times n$ Toeplitz matrix $A_Z$ such that every minor of order at most $m-1$ is strictly positive and
+\begin{equation}\label{eq:exact-Z}
+ \det (A_Z)_{[:,[t,t+m-1]]}=0
+ \quad\Longleftrightarrow\quad
+ t\in Z.
+\end{equation}
+\end{corollary}
+
+\begin{proof}
+Choose $0<\varepsilon<\eta$ and put
+\[
+ \delta_t=
+ \begin{cases}
+  0,&t\in Z,\\
+  \varepsilon,&t\notin Z.
+ \end{cases}
+\]
+Then $\delta\in[0,\eta)^N$.  Since $Z$ is proper, $\delta\ne0$, and Theorem~\ref{thm:local-realization} applies.
+\end{proof}
+
+
+\section{A symmetric finite-difference Toeplitz chart}\label{sec:polynomial-chart}
+
+The preceding construction already proves the required local realizability, using a one-sided coefficient slice with triangular Jacobian.  The second rank-$(m-1)$ base point below is included for structural information: it gives a canonical symmetric positive-definite Jacobian governed by a finite section of a discrete-Laplacian power.
+
+Put $d=m-2$, choose $M>n+m$, and define, on the displayed coefficient range $1-m\le k\le n-1$,
+\begin{equation}\label{eq:polynomial-base-coefficients}
+ a_k^{\mathrm{pol}}=(M+k)^d.
+\end{equation}
+Let
+\[
+ T^{\mathrm{pol}}=T_m(a^{\mathrm{pol}}).
+\]
+
+\begin{lemma}[Polynomial base point]\label{lem:polynomial-base}
+Every minor of $T^{\mathrm{pol}}$ of order at most $m-1$ is strictly positive, and
+\[
+ \rank T^{\mathrm{pol}}=m-1.
+\]
+Consequently, every maximal minor vanishes.
+\end{lemma}
+
+\begin{proof}
+Choose row indices $i_1<\cdots<i_k$ and column indices $j_1<\cdots<j_k$, where $1\le k\le m-1$.  Put
+\[
+ x_p=M-i_p,
+ \qquad
+ y_q=j_q.
+\]
+Then $x_1>\cdots>x_k>0$ and $0<y_1<\cdots<y_k$, while the selected minor has entries $(x_p+y_q)^d$.  Expanding
+\[
+ (x+y)^d=\sum_{\ell=0}^d\binom d\ell x^\ell y^{d-\ell}
+\]
+and applying Cauchy--Binet gives
+\begin{align}\label{eq:polynomial-CB}
+ \det\bigl((x_p+y_q)^d\bigr)_{p,q=1}^k
+ ={}&\sum_{0\le\ell_1<\cdots<\ell_k\le d}
+ \left(\prod_{\nu=1}^k\binom d{\ell_\nu}\right)\\
+ &\hspace{1.2em}\times
+ \det\bigl(x_p^{\ell_\nu}\bigr)_{p,\nu=1}^k
+ \det\bigl(y_q^{d-\ell_\nu}\bigr)_{\nu,q=1}^k.\notag
+\end{align}
+For increasing exponents, a generalized Vandermonde determinant is positive on increasing positive variables.  Reversing the decreasing $x$-variables gives the first determinant in each summand the sign $(-1)^{\binom k2}$.  The exponents $d-\ell_\nu$ decrease, so the second determinant has the same sign.  Every summand in \eqref{eq:polynomial-CB} is therefore strictly positive, and such summands exist because $k\le d+1=m-1$.
+
+Each row of $T^{\mathrm{pol}}$, viewed as a function of the column index, is a polynomial of degree at most $d$.  Hence its rank is at most $d+1=m-1$, while a positive $(m-1)\times(m-1)$ minor gives equality.
+\end{proof}
+
+Put $N=n-m+1$.  Freeze every Toeplitz coefficient except
+\[
+ a_0,a_1,\ldots,a_{N-1},
+\]
+and define
+\begin{equation}\label{eq:Psi}
+ \Psi(a_0,\ldots,a_{N-1})=(D_1,\ldots,D_N).
+\end{equation}
+At the polynomial base point, $\Psi=0$.
+
+\begin{theorem}[Explicit finite-difference Jacobian]\label{thm:explicit-jacobian}
+At the polynomial base point,
+\begin{equation}\label{eq:explicit-jacobian}
+ D\Psi=\kappa K,
+ \qquad
+ \kappa=
+ \left(\prod_{\ell=0}^{m-2}\binom{m-2}{\ell}\right)
+ \left(\prod_{j=1}^{m-2}j!\right)^2>0,
+\end{equation}
+where
+\begin{equation}\label{eq:K}
+ K_{ts}=(-1)^{s-t}\binom{2m-2}{m-1+s-t},
+ \qquad 1\le t,s\le N,
+\end{equation}
+and the binomial coefficient is zero outside its usual range.  The matrices $K$ and $D\Psi$ are symmetric positive definite.  In particular, $D\Psi$ is invertible.
+\end{theorem}
+
+\begin{proof}
+Index the rows and columns of the $t$th consecutive block locally by $0\le p,q\le m-1$.  At the base point its entries are
+\[
+ B^{(0)}_{t,pq}=(M+t-1+q-p)^d.
+\]
+Set
+\begin{equation}\label{eq:finite-difference-kernels}
+ u_p=v_p=(-1)^p\binom{m-1}{p},
+ \qquad 0\le p\le m-1.
+\end{equation}
+Because $d=m-2$, the vanishing of the $(m-1)$st finite difference gives
+\[
+ B_t^{(0)}v=0,
+ \qquad
+ u^{\transpose}B_t^{(0)}=0.
+\]
+Lemma~\ref{lem:polynomial-base} shows that $B_t^{(0)}$ has rank $m-1$.  Its left and right kernels are therefore one-dimensional, so
+\begin{equation}\label{eq:adjugate-rank-one}
+ \operatorname{adj}(B_t^{(0)})=\kappa_tvu^{\transpose}
+\end{equation}
+for some nonzero scalar $\kappa_t$.  The $(0,0)$ entry of the adjugate is the positive minor obtained by deleting the first row and first column, while $v_0u_0=1$; hence $\kappa_t>0$.
+
+In fact this scalar is independent of $t$.  Put $x=M+t-1$.  The $(0,0)$ cofactor in \eqref{eq:adjugate-rank-one} is
+\[
+ \kappa_t=\det\bigl((x+j-i)^d\bigr)_{i,j=1}^{d+1}.
+\]
+Expanding $(x-i+j)^d$ in the monomial bases factors this determinant into a Vandermonde determinant on the decreasing nodes $x-1,\ldots,x-d-1$, the diagonal factor $\prod_{\ell=0}^d\binom d\ell$, and a Vandermonde determinant with reversed exponents on $1,\ldots,d+1$.  The two reversal signs cancel.  Each Vandermonde magnitude is
+\[
+ \prod_{1\le i<j\le d+1}(j-i)
+ =\prod_{j=1}^{d}j!,
+\]
+so no factor depends on $x$, and
+\begin{equation}\label{eq:kappa-closed}
+ \kappa_t=\kappa=
+ \left(\prod_{\ell=0}^{d}\binom d\ell\right)
+ \left(\prod_{j=1}^{d}j!\right)^2.
+\end{equation}
+
+Within the $t$th block, the entry in local position $(p,q)$ is $a_{t+q-p-1}$.  Differentiation with respect to $a_{s-1}$ therefore collects the cofactors with $q-p=s-t$.  Using \eqref{eq:adjugate-rank-one} and \eqref{eq:finite-difference-kernels},
+\begin{align*}
+ \frac{\partial D_t}{\partial a_{s-1}}
+ &=\kappa\sum_{q-p=s-t}v_qu_p\\
+ &=\kappa(-1)^{s-t}
+   \sum_p\binom{m-1}{p}\binom{m-1}{p+s-t}\\
+ &=\kappa(-1)^{s-t}
+   \binom{2m-2}{m-1+s-t},
+\end{align*}
+where the last equality is Vandermonde's convolution.  This proves \eqref{eq:explicit-jacobian}--\eqref{eq:K}.
+
+The Fourier coefficients of
+\[
+ (2-2\cos\theta)^{m-1}
+ =(1-e^{i\theta})^{m-1}(1-e^{-i\theta})^{m-1}
+\]
+are the entries in \eqref{eq:K}.  Hence, for $\xi=(\xi_1,\ldots,\xi_N)\in\RR^N$,
+\begin{equation}\label{eq:K-energy}
+ \xi^{\transpose}K\xi
+ =\frac1{2\pi}\int_0^{2\pi}
+ \left|\sum_{t=1}^N\xi_te^{it\theta}\right|^2
+ (2-2\cos\theta)^{m-1}\,d\theta.
+\end{equation}
+If $\xi\ne0$, its trigonometric polynomial is not zero almost everywhere, while the weight is positive except at $\theta=0$.  Thus \eqref{eq:K-energy} is strictly positive.  Since $\kappa>0$, \eqref{eq:explicit-jacobian} shows that $D\Psi$ is symmetric positive definite as well.
+\end{proof}
+
+\begin{corollary}[Polynomial-chart realization]\label{cor:polynomial-realization}
+There is a neighborhood $V$ of the origin in $\RR^N$ such that every $\delta\in V\cap[0,\infty)^N$ is the consecutive-minor vector of a Toeplitz matrix whose minors of order at most $m-1$ are strictly positive and whose maximal minors are nonnegative.  It has full row rank precisely when $\delta\ne0$.
+\end{corollary}
+
+\begin{proof}
+Apply the inverse function theorem to $\Psi$ at the polynomial base point.  Strict positivity of the finitely many lower-order minors persists in a sufficiently small coefficient neighborhood.  For a nonnegative target $\delta$, Corollary~\ref{cor:anchor-support} makes every maximal minor nonnegative, and full row rank is equivalent to at least one component of $\delta$ being positive.
+\end{proof}
+
+\begin{remark}
+The complete-homogeneous and polynomial charts prove the same local realizability through different coordinate slices, but only the first is needed for the classification.  Its triangular Jacobian is well adapted to construction.  The second chart instead identifies the canonical symmetric positive-definite finite section of the $(m-1)$st power of the discrete one-dimensional Laplacian.
+\end{remark}
+
+
+\section{Proof of the classification theorem}\label{sec:assembly}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Assume (i), and let $A$ be a full-row-rank totally nonnegative Toeplitz representation of $M$.  Since $M$ is paving, every $(m-1)$-subset of columns is independent.  Define $Z=Z(A)$ by \eqref{eq:main-Z}.  Theorem~\ref{thm:paving-refinement} gives
+\[
+ \det A_{[:,J]}=0
+ \quad\Longleftrightarrow\quad
+ [j_1,j_m-m+1]\subseteq Z.
+\]
+Full row rank makes $Z$ proper, and this is exactly (ii).
+
+Assume (ii), and write the maximal runs of $Z$ as $[u_\alpha,v_\alpha]$.  The basis rule says that an $m$-subset is a nonbasis exactly when it is contained in
+\[
+ H_\alpha=[u_\alpha,v_\alpha+m-1]
+\]
+for some $\alpha$.  The calculation in Theorem~\ref{thm:interval-support} shows that these are proper dependent hyperplanes and that distinct ones meet in at most $m-2$ elements.  Thus (iii) holds.
+
+Conversely, assume (iii).  Write $H_\alpha=[p_\alpha,h_\alpha]$ and set
+\[
+ Z_\alpha=[p_\alpha,h_\alpha-m+1].
+\]
+Each $Z_\alpha$ is nonempty.  Order the hyperplanes by their left endpoints.  For consecutive intervals, the intersection bound gives $p_{\alpha+1}\ge h_\alpha-m+3$, hence $\min Z_{\alpha+1}\ge\max Z_\alpha+2$.  Thus the $Z_\alpha$ are disjoint and separated by at least one integer.  If their union were all of $[N]$, there could be only one component, and its hyperplane would be $[n]$.  Since this is excluded, their union
+\[
+ Z=\bigcup_\alpha Z_\alpha
+\]
+is a proper subset of $[N]$.  An $m$-subset $J=\{j_1<\cdots<j_m\}$ lies in some $H_\alpha$ exactly when $[j_1,j_m-m+1]\subseteq Z_\alpha$.  Because the $Z_\alpha$ are the connected components of $Z$, this is equivalent to the negation of \eqref{eq:main-basis-rule}.  Hence (ii) and (iii) are equivalent.
+
+Finally, assume (ii) and apply Corollary~\ref{cor:every-Z}.  The resulting Toeplitz matrix is full-row-rank and totally nonnegative, all of its lower-order minors are positive, and Theorem~\ref{thm:paving-refinement} gives exactly the basis rule \eqref{eq:main-basis-rule}.  It therefore represents $M$, proving (i) and the strengthened realization statement.
+
+The map from proper subsets $Z\subsetneq[N]$ to supports is injective because $t\in Z$ exactly when $[t,t+m-1]$ is a nonbasis, and it is surjective by the realization.  The number of cells in the fixed natural column order is therefore $2^N-1$.
+\end{proof}
+
+\begin{corollary}[Paving interval positroids]\label{cor:paving-interval}
+The paving positroids admitting full-row-rank all-minor TN Toeplitz representations are precisely the paving interval positroids in the natural column order.
+\end{corollary}
+
+\begin{proof}
+For a paving matroid, the ordinary-interval description of the dependent-hyperplane clutter is the interval-paving condition studied in \cite{Park}.  Apply Theorem~\ref{thm:main}.
+\end{proof}
+
+\begin{corollary}[Basis generating description]\label{cor:basis-description}
+Let $Z\subsetneq[N]$.  The basis set of the corresponding Toeplitz paving positroid is
+\[
+ \cB_Z=\left\{\{j_1<\cdots<j_m\}\subseteq[n]:
+ \text{some }t\in[j_1,j_m-m+1]\text{ lies outside }Z\right\}.
+\]
+If the components of $Z$ are $[u_\alpha,v_\alpha]$, then
+\[
+ \binom{[n]}m\setminus\cB_Z
+ =\bigsqcup_\alpha\binom{[u_\alpha,v_\alpha+m-1]}m.
+\]
+\end{corollary}
+
+\begin{proof}
+Only disjointness of the last union needs comment.  Distinct hyperplanes meet in at most $m-2$ elements, so no $m$-subset can lie in two of them.
+\end{proof}
+
+\begin{remark}[Low-rank recovery]\label{rem:low-rank-recovery}
+When $m=2$, paving means that there are no loops.  A zero run of adjacent $2\times2$ minors produces one consecutive parallel class, giving the positive no-loop rank-two stratum of \cite[Theorem~3 and Corollary~4]{PaperA} and the count $2^{n-1}-1$.
+
+When $m=3$, the realizations have all $2\times2$ minors positive.  Consecutive $3\times3$ zero runs produce the collinear intervals of the strictly ordered projective chain, recovering the strict-$\TN_2$ rank-three stratum of \cite[Corollary~9]{PaperA} and the count $2^{n-2}-1$.
+\end{remark}
+
+\section{An exact \texorpdfstring{$4\times6$}{4 by 6} example}\label{sec:example}
+
+The local construction can sometimes be written in closed form.  For $m=4$, take the complete-homogeneous base with $p=3$ and $L=4$, and consider
+\begin{equation}\label{eq:example-family}
+ A(\varepsilon)=
+ \begin{pmatrix}
+ 15&21&28&36&45-\varepsilon&55-6\varepsilon+15\varepsilon^2\\
+ 10&15&21&28&36&45-\varepsilon\\
+ 6&10&15&21&28&36\\
+ 3&6&10&15&21&28
+ \end{pmatrix}.
+\end{equation}
+This is Toeplitz.  Direct determinant calculation gives
+\begin{equation}\label{eq:example-D}
+ (D_1,D_2,D_3)=(0,\varepsilon,0).
+\end{equation}
+All minors of order at most three are strictly positive for sufficiently small $\varepsilon>0$, either by continuity from the base point or by direct calculation.  Hence Theorem~\ref{thm:interpolation} shows that $A(\varepsilon)$ is totally nonnegative and that its only zero maximal minors are those on columns $1234$ and $3456$.
+
+For the rational value $\varepsilon=1/50$, the matrix is
+\[
+ \begin{pmatrix}
+ 15&21&28&36&\frac{2249}{50}&\frac{27443}{500}\\
+ 10&15&21&28&36&\frac{2249}{50}\\
+ 6&10&15&21&28&36\\
+ 3&6&10&15&21&28
+ \end{pmatrix}.
+\]
+Exact enumeration gives
+\[
+ \min\{2\times2\text{ minors}\}=6,
+ \qquad
+ \min\{3\times3\text{ minors}\}=\frac{841}{2500}.
+\]
+The fifteen maximal minors are
+\[
+\begin{array}{c|c@{\qquad}c|c@{\qquad}c|c}
+J&\det A_J&J&\det A_J&J&\det A_J\\ \hline
+1234&0&1235&\frac1{50}&1236&\frac{27}{500}\\
+1245&\frac3{50}&1246&\frac{81}{500}&1256&\frac{79}{625}\\
+1345&\frac3{50}&1346&\frac{81}{500}&1356&\frac{69}{500}\\
+1456&\frac{87}{2500}&2345&\frac1{50}&2346&\frac{27}{500}\\
+2356&\frac{23}{500}&2456&\frac{29}{2500}&3456&0
+\end{array}
+\]
+Thus this example realizes $Z=\{1,3\}$.  The two maximal zero runs produce the interval hyperplanes $[1,4]$ and $[3,6]$, whose intersection has the extremal allowed size $m-2=2$.
+
+
+\section{Outlook}\label{sec:outlook}
+
+The paving hypothesis is exactly what makes the projected adjacent-rank flag strictly positive, so the consecutive-anchor expansion has no zero denominator and no cancellation.  In lower ranks, the companion paper shows how loops, endpoint parallel classes, and lower-rank interval flats must first be separated before a convex or interpolation description emerges.  A natural next step in higher rank is therefore a stratified version of the present argument in which lower-rank flats are contracted or recorded before the maximal-minor interpolation is applied.
+
+Within the paving sector, the classification is complete: consecutive maximal minors are support coordinates, their zero runs are the dependent interval hyperplanes, and both Toeplitz charts realize every proper zero pattern.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+
+During the preparation of this work, the authors used OpenAI's ChatGPT to explore proof strategies, check formal polynomial identities, and assist in drafting.  The authors reviewed and edited the resulting material and take full responsibility for the content of the publication.
+
+\begin{thebibliography}{99}
+
+\bibitem{AIM}
+American Institute of Mathematics,
+\emph{Theory and applications of total positivity, Problem 1.3 (Problem 9 in the original workshop handout)},
+\url{https://aimpl.org/totalpos/1/}.
+
+\bibitem{BEW}
+J. Boretsky, C. Eur, and L. K. Williams,
+\emph{Polyhedral and tropical geometry of flag positroids},
+Algebr. Number Theory \textbf{18} (2024), no.~7, 1333--1374;
+corrected arXiv version arXiv:2208.09131v5 (2025), with an accompanying erratum notice.
+
+\bibitem{BlochKarp}
+A. M. Bloch and S. N. Karp,
+\emph{On two notions of total positivity for partial flag varieties},
+Adv. Math. \textbf{414} (2023), 108855,
+\href{https://doi.org/10.1016/j.aim.2022.108855}{doi:10.1016/j.aim.2022.108855}.
+
+\bibitem{deBoorDeVore}
+C. de Boor and R. DeVore,
+\emph{A geometric proof of total positivity for spline interpolation},
+Math. Comp. \textbf{45} (1985), no.~172, 497--504.
+
+\bibitem{FJ}
+S. M. Fallat and C. R. Johnson,
+\emph{Totally Nonnegative Matrices},
+Princeton Series in Applied Mathematics, Princeton University Press, Princeton, NJ, 2011.
+
+\bibitem{GarciaTierz}
+D. Garc\'ia-Garc\'ia and M. Tierz,
+\emph{Toeplitz minors and specializations of skew Schur polynomials},
+J. Combin. Theory Ser. A \textbf{172} (2020), 105201.
+
+\bibitem{Knutson}
+A. Knutson,
+\emph{Schubert calculus and shifting of interval positroid varieties},
+arXiv:1408.1261 (2014).
+
+\bibitem{KnutsonLederer}
+A. Knutson and M. Lederer,
+\emph{Interval positroid varieties and a deformation of the ring of symmetric functions},
+DMTCS Proc. AT, 26th International Conference on Formal Power Series and Algebraic Combinatorics (2014),
+\href{https://doi.org/10.46298/dmtcs.2453}{doi:10.46298/dmtcs.2453}.
+
+\bibitem{Lyche}
+T. Lyche,
+\emph{A recurrence relation for Chebyshevian B-splines},
+Constr. Approx. \textbf{1} (1985), 155--173,
+\href{https://doi.org/10.1007/BF01890028}{doi:10.1007/BF01890028}.
+
+\bibitem{Macdonald}
+I. G. Macdonald,
+\emph{Symmetric Functions and Hall Polynomials}, second ed.,
+Oxford Mathematical Monographs, Oxford University Press, Oxford, 1995.
+
+\bibitem{Mazure}
+M.-L. Mazure,
+\emph{Understanding recurrence relations for Chebyshevian B-splines via blossoms},
+J. Comput. Appl. Math. \textbf{219} (2008), no.~2, 457--470,
+\href{https://doi.org/10.1016/j.cam.2007.06.029}{doi:10.1016/j.cam.2007.06.029}.
+
+\bibitem{Oxley}
+J. Oxley,
+\emph{Matroid Theory}, second ed.,
+Oxford Graduate Texts in Mathematics, vol.~21,
+Oxford University Press, Oxford, 2011.
+
+\bibitem{PaperA}
+Y. Cheng, S. Gu, and W. Qi,
+\emph{Toeplitz positroids in ranks two and three},
+companion preprint, second revised version, August 20, 2026.
+
+\bibitem{Park}
+H. Park,
+\emph{Excluded minors of interval positroids that are paving matroids},
+arXiv:2312.03525v1 (2023).
+
+\bibitem{Postnikov}
+A. Postnikov,
+\emph{Total positivity, Grassmannians, and networks},
+arXiv:math/0609764 (2006).
+
+\bibitem{Rao}
+J. Rao,
+\emph{Positivity, Grassmannian geometry and simplex-like structures of scattering amplitudes},
+J. High Energy Phys. \textbf{2017} (2017), no.~12, article~147,
+\href{https://doi.org/10.1007/JHEP12(2017)147}{doi:10.1007/JHEP12(2017)147};
+arXiv:1609.08627v5.
+
+\bibitem{Rietsch}
+K. Rietsch,
+\emph{Totally positive Toeplitz matrices and quantum cohomology of partial flag varieties},
+J. Amer. Math. Soc. \textbf{16} (2003), no.~2, 363--392;
+erratum, J. Amer. Math. Soc. \textbf{21} (2008), no.~2, 611--614.
+
+\bibitem{RietschSurvey}
+K. Rietsch,
+\emph{Totally positive Toeplitz matrices: classical and modern},
+in \emph{Proceedings of the International Congress of Mathematicians 2026},
+advance online publication (2026),
+\href{https://doi.org/10.1137/25M1806727}{doi:10.1137/25M1806727};
+arXiv:2509.25163v3.
+
+\end{thebibliography}
+
+\end{document}

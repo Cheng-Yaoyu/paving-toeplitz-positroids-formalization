@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: >-
+  If you use this formalization, please cite the accompanying manuscript.
+title: Formalization of Positive Consecutive-Minor Interpolation and Paving Toeplitz Positroids
+type: software
+authors:
+  - family-names: Cheng
+    given-names: Yaoyu
+  - family-names: Gu
+    given-names: Sixuan
+  - family-names: Qi
+    given-names: Wei
+version: 0.1.0
+date-released: 2026-08-25
+repository-code: https://github.com/Cheng-Yaoyu/paving-toeplitz-positroids-formalization

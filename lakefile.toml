@@ -1,0 +1,23 @@
+name = "PavingToeplitzPositroids"
+version = "0.1.0"
+keywords = ["math"]
+defaultTargets = ["PavingToeplitzPositroids"]
+
+[leanOptions]
+pp.unicode.fun = true
+relaxedAutoImplicit = false
+weak.linter.mathlibStandardSet = true
+maxSynthPendingDepth = 3
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.29.0"
+
+[[require]]
+name = "ToeplitzPositroids"
+git = "https://github.com/Cheng-Yaoyu/toeplitz-positroids-ranks-2-3-formalization.git"
+rev = "9cd9843cbfe0563a14c353b61e3fff54ab5bdb44"
+
+[[lean_lib]]
+name = "PavingToeplitzPositroids"
