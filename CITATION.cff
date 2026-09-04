@@ -10,6 +10,18 @@ authors:
     given-names: Sixuan
   - family-names: Qi
     given-names: Wei
-version: 0.1.0
-date-released: 2026-08-25
+version: 0.2.0
+date-released: 2026-09-04
 repository-code: https://github.com/Cheng-Yaoyu/paving-toeplitz-positroids-formalization
+preferred-citation:
+  type: article
+  title: Positive Consecutive-Minor Interpolation and Paving Toeplitz Positroids
+  authors:
+    - family-names: Cheng
+      given-names: Yaoyu
+    - family-names: Gu
+      given-names: Sixuan
+    - family-names: Qi
+      given-names: Wei
+  year: 2026
+  url: https://github.com/Cheng-Yaoyu/paving-toeplitz-positroids-formalization/blob/main/paper/positive_consecutive_minor_interpolation_and_paving_toeplitz_positroids.pdf

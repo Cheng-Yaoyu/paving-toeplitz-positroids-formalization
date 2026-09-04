@@ -5,13 +5,18 @@ Toeplitz Positroids*.
 
 ## Paper
 
-The revised manuscript is available as
-[`paper/positive_consecutive_minor_interpolation_and_paving_toeplitz_positroids.pdf`](paper/positive_consecutive_minor_interpolation_and_paving_toeplitz_positroids.pdf),
-with its LaTeX source in the same directory. The revision records the precise
+- [Manuscript PDF](paper/positive_consecutive_minor_interpolation_and_paving_toeplitz_positroids.pdf)
+- [LaTeX source](paper/positive_consecutive_minor_interpolation_and_paving_toeplitz_positroids.tex)
+
+The revision records the precise
 relationship with Rao's stacking-positivity relation and strengthens the
 polynomial-chart Jacobian to an explicit symmetric positive-definite matrix.
 
-## Relationship to Paper A
+## Toeplitz-positroid series
+
+- **Paper A:** [Toeplitz Positroids in Ranks Two and Three](https://github.com/Cheng-Yaoyu/toeplitz-positroids-ranks-2-3-formalization)
+- **Paper B:** this repository
+- **Paper C:** [Truncations, Circuit Layers, and Quantum Boundary Charts for Totally Nonnegative Toeplitz Positroids](https://github.com/Cheng-Yaoyu/toeplitz-positroids-truncations-boundary-charts-formalization)
 
 This repository is **Paper B** in the Toeplitz-positroid project. Paper A gives
 the complete classification in ranks two and three, including loops, endpoint
@@ -76,3 +81,10 @@ only Lean's standard `propext`, `Classical.choice`, and `Quot.sound`.
 - `PavingToeplitzPositroids.lean`: root import;
 - `paper/`: manuscript PDF and LaTeX source;
 - `FORMALIZATION.md`: paper-to-Lean crosswalk and audit;
+- `CITATION.cff`: machine-readable citation metadata.
+
+## Citation
+
+Use the citation metadata in [`CITATION.cff`](CITATION.cff). Until an arXiv or
+journal identifier is assigned, cite the manuscript together with this GitHub
+repository.

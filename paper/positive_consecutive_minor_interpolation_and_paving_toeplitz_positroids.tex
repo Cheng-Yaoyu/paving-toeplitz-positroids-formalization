@@ -29,7 +29,7 @@
 \newcommand{\one}{\mathbf 1}
 
 \title[PAVING TOEPLITZ POSITROIDS]{POSITIVE CONSECUTIVE-MINOR INTERPOLATION AND PAVING TOEPLITZ POSITROIDS}
-\date{Revised August 25, 2026}
+\date{Revised September 4, 2026}
 
 \author{Yaoyu Cheng}
 \address{Faculty of Business Administration, The Chinese University of Hong Kong, Hong Kong, China}
@@ -79,7 +79,7 @@ A real matrix is \emph{totally nonnegative} if every minor determinant is nonneg
 \]
 then selects a rigid linear locus inside the matrix space.  Determining which positroid cells meet this locus is part of the Toeplitz support problem in the AIM list on total positivity \cite{AIM}.
 
-A companion paper gives the complete Toeplitz-positroid classification in ranks two and three, including loops, endpoint parallel classes, and rank-two interval flats \cite{PaperA}.  Here we treat the paving sector in arbitrary rank.  For a rank-$m$ column matroid, paving means that every set of at most $m-1$ columns is independent; see \cite{Oxley}.  A hyperplane is called dependent when it contains at least $m$ elements.  The paving hypothesis removes lower-rank degenerations while allowing arbitrary vanishing among maximal minors.  In ranks two and three, the present theorem recovers the positive no-loop and strict-$\TN_2$ strata of the companion classification; in ranks $m\ge4$ it gives a new complete boundary layer.
+A companion paper gives the complete Toeplitz-positroid classification in ranks two and three, including loops, endpoint parallel classes, and rank-two interval flats \cite{PaperA}.  Here we treat the paving sector in arbitrary rank.  The subsequent companion paper develops truncations, first circuit layers, and quantum boundary charts beyond the loop-free paving setting \cite{PaperC}.  For a rank-$m$ column matroid, paving means that every set of at most $m-1$ columns is independent; see \cite{Oxley}.  A hyperplane is called dependent when it contains at least $m$ elements.  The paving hypothesis removes lower-rank degenerations while allowing arbitrary vanishing among maximal minors.  In ranks two and three, the present theorem recovers the positive no-loop and strict-$\TN_2$ strata of the companion classification; in ranks $m\ge4$ it gives a new complete boundary layer.
 
 For $1\le t\le N:=n-m+1$, write
 \[
@@ -889,6 +889,10 @@ The paving hypothesis is exactly what makes the projected adjacent-rank flag str
 
 Within the paving sector, the classification is complete: consecutive maximal minors are support coordinates, their zero runs are the dependent interval hyperplanes, and both Toeplitz charts realize every proper zero pattern.
 
+\section*{Data and code availability}
+The manuscript, Lean~4 formalization, and reproducibility instructions are available at
+the \href{https://github.com/Cheng-Yaoyu/paving-toeplitz-positroids-formalization}{GitHub repository}.
+
 \section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
 
 During the preparation of this work, the authors used OpenAI's ChatGPT to explore proof strategies, check formal polynomial identities, and assist in drafting.  The authors reviewed and edited the resulting material and take full responsibility for the content of the publication.
@@ -904,6 +908,7 @@ American Institute of Mathematics,
 J. Boretsky, C. Eur, and L. K. Williams,
 \emph{Polyhedral and tropical geometry of flag positroids},
 Algebr. Number Theory \textbf{18} (2024), no.~7, 1333--1374;
+\href{https://doi.org/10.2140/ant.2024.18.1333}{doi:10.2140/ant.2024.18.1333};
 corrected arXiv version arXiv:2208.09131v5 (2025), with an accompanying erratum notice.
 
 \bibitem{BlochKarp}
@@ -964,7 +969,14 @@ Oxford University Press, Oxford, 2011.
 \bibitem{PaperA}
 Y. Cheng, S. Gu, and W. Qi,
 \emph{Toeplitz positroids in ranks two and three},
-companion preprint, second revised version, August 20, 2026.
+companion preprint, fourth revised version, September 2026,
+\href{https://github.com/Cheng-Yaoyu/toeplitz-positroids-ranks-2-3-formalization/blob/main/paper/toeplitz_positroids_ranks_2_3_fourth_revised.pdf}{GitHub manuscript}.
+
+\bibitem{PaperC}
+Y. Cheng, S. Gu, and W. Qi,
+\emph{Truncations, circuit layers, and quantum boundary charts for totally nonnegative Toeplitz positroids},
+companion preprint, revised September 2026,
+\href{https://github.com/Cheng-Yaoyu/toeplitz-positroids-truncations-boundary-charts-formalization/blob/main/paper/toeplitz_positroids_truncations_boundary_charts.pdf}{GitHub manuscript}.
 
 \bibitem{Park}
 H. Park,
@@ -993,7 +1005,7 @@ erratum, J. Amer. Math. Soc. \textbf{21} (2008), no.~2, 611--614.
 K. Rietsch,
 \emph{Totally positive Toeplitz matrices: classical and modern},
 in \emph{Proceedings of the International Congress of Mathematicians 2026},
-advance online publication (2026),
+Vol.~3, invited lectures, 2026,
 \href{https://doi.org/10.1137/25M1806727}{doi:10.1137/25M1806727};
 arXiv:2509.25163v3.
 
